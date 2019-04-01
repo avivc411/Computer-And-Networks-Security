@@ -9,10 +9,10 @@ public class Main {
             return;
         String keys, output, input;
         byte[] message, cipher, k;
+        keys=args[2];
+        input=args[4];
+        output=args[6];
         if(args[0].equals("-e") || args[0].equals("-d")){
-            keys=args[2];
-            input=args[4];
-            output=args[6];
             k=Read(keys);
             if(args[0].equals("-e")){
                 Encrypt encryptor=new Encrypt();
@@ -28,7 +28,9 @@ public class Main {
             }
         }
         else if(args[0].equals("-b")){
-
+            String m=keys, c=input;
+            Hack hack=new Hack();
+            Write(output, hack.hack(Read(m), Read(c)));
         }
     }
 
