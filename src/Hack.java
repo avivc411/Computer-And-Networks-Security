@@ -2,13 +2,10 @@ public class Hack {
     Encrypt encrypt=new Encrypt();
 
     public byte[] hack(byte[] m, byte[] c){
-        byte[] ans=new byte[48], k1=GenerateKey(), k2=GenerateKey(), k3, tmpC;
-        /*k3=FirstIteration(m, c);
-        tmpC=decrypt.oneIteration(c, k3);
-        k2=SecondIteration(m, tmpC);
-        tmpC=decrypt.oneIteration(tmpC, k2);
-        k1=ThirdIteration(m, tmpC);*/
-        k3=encrypt.oneIteration(encrypt.oneIteration(encrypt.oneIteration(m, k1), k2), c);
+        byte[] ans=new byte[48], k1=GenerateKey(), k2, k3;
+        Encrypt e=new Encrypt();
+        k2=e.ShiftRows(k1);
+        k3=Encrypt.AddRoundKey(e.ShiftRows(e.ShiftRows(e.ShiftRows(m))),c);
         for(int i=0; i<16; i++)
             ans[i]=k1[i];
         for(int i=16, j=0; j<16; j++, i++)
